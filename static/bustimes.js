@@ -121,3 +121,29 @@ SS = [
         BMSS19,
         CWSS10,
     ]
+function closest(stop) {
+    var time = null;
+    var bus = null;
+    var currentDate = new Date();
+    var current_time = null;
+    if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
+        for (i = 0; i < SS.length; i++) {
+            if (stop == SS[i].getStopName() && (time == null || time > SS[i].findClosestTimes())) {
+                current_time = (currentDate.getHours()*60) + currentDate.getMinutes()
+                time = SS[i].findClosestTimes(current_time);
+                bus = SS[i].getBusName();
+            }
+        }
+    }
+    else {
+        for (i = 0; i < MF.length; i++) {
+            if (stop == MF[i].getStopName() && (time == null || time > MF[i].findClosestTimes())) {
+                current_time = (currentDate.getHours()*60) + currentDate.getMinutes()
+                time = MFS[i].findClosestTimes(current_time);
+                bus = MF[i].getBusName();
+    }
+}
+    }
+    
+    return bus + " will come to your stop in " + Math.floor(current_time-time) + " minutes";
+}
